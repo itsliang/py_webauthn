@@ -602,6 +602,8 @@ class WebAuthnRegistrationResponse(object):
             if sys.version_info < (3, 0):  # if python2
                 c = json.loads(decoded_cd.decode('utf-8'))
             else:
+                if (isinstance(decoded_cd, bytes)):
+                    decoded_cd = str(decoded_cd, 'utf-8')
                 c = json.loads(decoded_cd)
 
             attestation_object = self.registration_response.get('attObj')
